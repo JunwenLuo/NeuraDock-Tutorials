@@ -3,6 +3,14 @@ import random
 from psychopy import visual, core, event
 from quality import quality_control
 import scipy.signal as signal
+import threading
+from neuradock_socket import DataStream 
+# pp=DataStream(IP='10.187.183.32', PORT=9600,save_path="1.txt")
+# pp=DataStream(IP='192.168.56.1', PORT=9600,save_path="1.txt")
+pp=DataStream(IP='172.17.144.1', PORT=9600,save_path="1.txt")
+# pp=DataStream(IP='100.79.160.249', PORT=9600,save_path="1.txt")
+th1 = threading.Thread(target=pp.run_DataStream)
+th1.start()
 def butter_highpass(cutoff, fs, order=5):
     nyq = 0.5 * fs
     normal_cutoff = cutoff / nyq
